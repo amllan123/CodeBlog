@@ -1,0 +1,77 @@
+.container{
+    margin-top: 30px;
+    
+}
+
+.title{
+    font-size: 40px;
+
+}
+
+.titleLogo{
+    font-family: "Russo One", sans-serif;
+}
+.post{
+    margin-top: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 50px;
+    background-color:var(--postColor);
+    padding: 10px;
+    border-radius: 2px;
+}
+
+.textContainer{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.imgContainer{
+    flex: 1;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.image{
+    object-fit: cover;
+}
+
+.postTitle{
+    font-size: 30px;
+}
+.postDesc{
+    font-size: 20px;color: var(--softTextColor);
+}
+
+.postButton{
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: max-content;
+}
+@media screen and (max-width:640px) {
+    .title{
+    font-size: 30px;
+}
+.post{
+    margin-top: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    gap: 50px;
+}
+.image{
+    object-fit:fill;
+    width: 200px;
+    height: 100px;
+    overflow: hidden;
+}
+
+
+}
+
