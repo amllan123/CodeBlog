@@ -25,7 +25,7 @@ const WritePage = () => {
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
   const [catSlug, setCatSlug] = useState("");
-
+  if (typeof window !== 'undefined') {
   useEffect(() => {
     const storage = getStorage(app);
     const upload = () => {
@@ -59,7 +59,8 @@ const WritePage = () => {
     };
 
     file && upload();
-  }, [file]);
+  }, [file]);}
+  
 
   if (status === "loading") {
     return <div className={styles.loading}>Loading...</div>;
@@ -91,7 +92,7 @@ const WritePage = () => {
 
     if (res.status === 200) {
       const data = await res.json();
-     console.log(data);
+      console.log(data);
     }
   };
 
@@ -103,7 +104,10 @@ const WritePage = () => {
         className={styles.input}
         onChange={(e) => setTitle(e.target.value)}
       />
-      <select className={styles.select} onChange={(e) => setCatSlug(e.target.value)}>
+      <select
+        className={styles.select}
+        onChange={(e) => setCatSlug(e.target.value)}
+      >
         <option value="react">React</option>
         <option value="dsa">DSA</option>
         <option value="food">food</option>
