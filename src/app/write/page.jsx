@@ -25,44 +25,49 @@ const WritePage = () => {
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
   const [catSlug, setCatSlug] = useState("");
-  if (typeof window !== "undefined") {
-    useEffect(() => {
-      const storage = getStorage(app);
-      const upload = () => {
-        const name = new Date().getTime() + file.name;
-        const storageRef = ref(storage, name);
 
-        const uploadTask = uploadBytesResumable(storageRef, file);
+  useEffect(() => {
+    const storage = getStorage(app);
+    const upload = () => {
+      const name = new Date().getTime() + file.name;
+      const storageRef = ref(storage, name);
 
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-            const progress =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log("Upload is " + progress + "% done");
-            switch (snapshot.state) {
-              case "paused":
-                console.log("Upload is paused");
-                break;
-              case "running":
-                console.log("Upload is running");
-                break;
-            }
-          },
-          (error) => {},
-          () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              setMedia(downloadURL);
-            });
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
           }
-        );
-      };
+        },
+        (error) => {},
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setMedia(downloadURL);
+          });
+        }
+      );
+    };
 
-      file && upload();
-    }, [file]);
+    file && upload();
+  }, [file]);
+
+  if (status === "loading") {
+    return <div className={styles.loading}>Loading...</div>;
   }
 
-
+  if (status === "unauthenticated") {
+    router.push("/");
+  }
 
   const slugify = (str) =>
     str
@@ -86,7 +91,7 @@ const WritePage = () => {
 
     if (res.status === 200) {
       const data = await res.json();
-      console.log(data);
+      router.push(`/posts/${data.slug}`);
     }
   };
 
@@ -98,12 +103,9 @@ const WritePage = () => {
         className={styles.input}
         onChange={(e) => setTitle(e.target.value)}
       />
-      <select
-        className={styles.select}
-        onChange={(e) => setCatSlug(e.target.value)}
-      >
-        <option value="react">React</option>
-        <option value="dsa">DSA</option>
+      <select className={styles.select} onChange={(e) => setCatSlug(e.target.value)}>
+        <option value="style">style</option>
+        <option value="fashion">fashion</option>
         <option value="food">food</option>
         <option value="culture">culture</option>
         <option value="travel">travel</option>
@@ -139,8 +141,7 @@ const WritePage = () => {
           theme="bubble"
           value={value}
           onChange={setValue}
-          placeholder="write here"
-    
+          placeholder="Tell your story..."
         />
       </div>
       <button className={styles.publish} onClick={handleSubmit}>
@@ -149,6 +150,5 @@ const WritePage = () => {
     </div>
   );
 };
-
 
 export default WritePage;
