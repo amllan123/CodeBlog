@@ -27,38 +27,41 @@ const WritePage = () => {
   const [catSlug, setCatSlug] = useState("");
 
   useEffect(() => {
-    const storage = getStorage(app);
-    const upload = () => {
-      const name = new Date().getTime() + file.name;
-      const storageRef = ref(storage, name);
+    if (typeof window !== "undefined") {
+      const storage = getStorage(app);
 
-      const uploadTask = uploadBytesResumable(storageRef, file);
+      const upload = () => {
+        const name = new Date().getTime() + file.name;
+        const storageRef = ref(storage, name);
 
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
-          switch (snapshot.state) {
-            case "paused":
-              console.log("Upload is paused");
-              break;
-            case "running":
-              console.log("Upload is running");
-              break;
+        const uploadTask = uploadBytesResumable(storageRef, file);
+
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log("Upload is " + progress + "% done");
+            switch (snapshot.state) {
+              case "paused":
+                console.log("Upload is paused");
+                break;
+              case "running":
+                console.log("Upload is running");
+                break;
+            }
+          },
+          (error) => {},
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              setMedia(downloadURL);
+            });
           }
-        },
-        (error) => {},
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            setMedia(downloadURL);
-          });
-        }
-      );
-    };
+        );
+      };
 
-    file && upload();
+      file && upload();
+    }
   }, [file]);
 
   if (status === "loading") {
