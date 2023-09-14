@@ -3,8 +3,9 @@ import styles from "./singlePage.module.css";
 import Menu from "@/components/menu/Menu";
 import Image from "next/image";
 
+const url=process.env.NEXTAUTH_URL
 const getData = async (slug) => {
-  const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {
+  const res = await fetch(`${url}/api/posts/${slug}`, {
     cache: "no-store",
   });
 
