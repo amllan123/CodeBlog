@@ -62,13 +62,7 @@ const WritePage = () => {
     }, [file]);
   }
 
-  if (status === "loading") {
-    return <div className={styles.loading}>Loading...</div>;
-  }
 
-  if (status === "unauthenticated") {
-    router.push("/");
-  }
 
   const slugify = (str) =>
     str
