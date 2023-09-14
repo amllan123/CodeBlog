@@ -59,8 +59,8 @@ const WritePage = () => {
     };
 
     file && upload();
-  }, [file]);}
-  
+  }, [file]);
+
 
   if (status === "loading") {
     return <div className={styles.loading}>Loading...</div>;
@@ -95,7 +95,7 @@ const WritePage = () => {
       console.log(data);
     }
   };
-
+}
   return (
     <div className={styles.container}>
       <input
