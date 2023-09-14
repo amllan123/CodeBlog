@@ -20,6 +20,7 @@ const MenuCategories = async () => {
       {data.map((i)=>(
 
            <Link
+           key={i.id}
            href={`/blog?cat=${i.slug}`}
         className={`${styles.categoryItem} ${styles.style}`}
       >
