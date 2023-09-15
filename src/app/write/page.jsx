@@ -148,6 +148,8 @@ const WritePage = () => {
           value={value}
           onChange={setValue}
           placeholder="Tell your story..."
+          modules={WritePage.modules}
+          formats={WritePage.formats}
           
         />
       </div>
@@ -157,5 +159,30 @@ const WritePage = () => {
     </div>
   );
 };
+WritePage.modules = {
+  toolbar: [
+    [{ header: "1" }, { header: "2" }, { font: [] }],
+    [{ list: "ordered" }, { list: "bullet" }],
+    ["bold", "italic", "underline"],
+    ["link"],
+    ["image"],
+    [{ align: [] }],
+    [{ color: [] }, { background: [] }],
+    ["code-block"],
+  ],
+};
 
+WritePage.formats = [
+  "header",
+  "list",
+  "bold",
+  "italic",
+  "underline",
+  "link",
+  "image",
+  "align",
+  "color",
+  "background",
+  "code-block",
+];
 export default WritePage;
