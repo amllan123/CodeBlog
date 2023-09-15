@@ -9,7 +9,7 @@ const Footer = () => {
       <div className={styles.info}>
         <div className={styles.logo}>
        
-          <h1 className={styles.logoText}>CodeBlog</h1>
+          <h1 className={styles.logoText}>Code Hive</h1>
         </div>
         <p className={styles.desc}>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim

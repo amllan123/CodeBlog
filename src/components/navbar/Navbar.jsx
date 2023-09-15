@@ -12,7 +12,7 @@ const Navbar = () => {
         <Image src="/facebook.png" width={24} height={24}/>
         <Image src="/instagram.png" width={24} height={24}/>
       </div>
-      <div className={styles.logo}>CodeBlog</div>
+      <div className={styles.logo}>Code Hive</div>
       <div className={styles.links}>
         <Themetoggler/>
         <Link className={styles.link} href="/">Home</Link>

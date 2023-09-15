@@ -18,7 +18,7 @@ const Card = ({ data, key }) => {
         <Link href={`/posts/${data.id}`}>
           <h1>{data.title}</h1>
         </Link>
-         <p className={styles.desc}>{data.desc.substring(0, 100)}...</p> 
+         <p className={styles.desc}  dangerouslySetInnerHTML={{__html:data?.desc.substring(0, 100)}} />
         
         <Link href={`/posts/${data.id}`} className={styles.link}>
           Read More

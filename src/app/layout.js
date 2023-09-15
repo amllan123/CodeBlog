@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 
 export const metadata = {
-  title: "Blog App",
+  title: "Code Hive",
   description: "The best blog app!",
 };
 
